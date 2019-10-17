@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>阿飞的博客</title>
-    <link>http://example.org/</link>
+    <link>http://afei.website/</link>
     <description>Recent content on 阿飞的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
     <lastBuildDate>Fri, 18 Oct 2019 00:08:32 +0800</lastBuildDate>
     
-	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://afei.website/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>单例模式</title>
-      <link>http://example.org/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</link>
+      <link>http://afei.website/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</link>
       <pubDate>Fri, 18 Oct 2019 00:08:32 +0800</pubDate>
       
-      <guid>http://example.org/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</guid>
+      <guid>http://afei.website/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</guid>
       <description> 单例模式 需求: 只创建一个对象, 不需要第二个
 public class World { private static final World SINGLETON_INSTANCE = new World(); public static World getInstance() { return SINGLETON_INSTANCE; } private World() { } }   final修饰一个实例, 作为静态成员
  静态工厂方法, 返回这个静态成员
@@ -26,10 +26,10 @@ public class World { private static final World SINGLETON_INSTANCE = new World()
     
     <item>
       <title>如何使用Hugo搭建博客</title>
-      <link>http://example.org/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
+      <link>http://afei.website/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
       <pubDate>Fri, 18 Oct 2019 00:08:32 +0800</pubDate>
       
-      <guid>http://example.org/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
+      <guid>http://afei.website/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
       <description>如何使用Hugo搭建博客 1.安装Hugo(windows)  在Hugo页面下载Hugo, 并且解压到C:\Hugo  2.设置环境变量  右键我的电脑-属性-高级系统设置-环境变量-新建   设置PATH - 新建 - %HUGO% 验证是否安装设置成功  3. 建立网站 hugo new site quickstart  将上面的代码在文件夹中创建一个新的Hugo网站quickstart
 4. 添加主题 cd quickstart # Download the theme git init git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke # Note for non-git users: # - If you do not have git installed, you can download the archive of the latest # version of this theme from: # https://github.</description>
     </item>
