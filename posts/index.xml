@@ -6,10 +6,24 @@
     <description>Recent content in Posts on 阿飞的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
-    <lastBuildDate>Fri, 18 Oct 2019 00:08:32 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 18 Oct 2019 16:47:09 +0800</lastBuildDate>
     
 	<atom:link href="http://afei.website/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Maven的包管理和包冲突</title>
+      <link>http://afei.website/posts/maven%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E5%92%8C%E5%8C%85%E5%86%B2%E7%AA%81/</link>
+      <pubDate>Fri, 18 Oct 2019 16:47:09 +0800</pubDate>
+      
+      <guid>http://afei.website/posts/maven%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E5%92%8C%E5%8C%85%E5%86%B2%E7%AA%81/</guid>
+      <description>Maven的包管理和包冲突 JVM的工作  加载字节码,执行一个类 如果碰到新的类, 加载它
+ 在哪里可以找到类
+ -classpath / -cp  类的全限定类名(目录层级) 唯一确定了一个类
+ 包就是把许多类放在一起压缩的jar
+ 传递性依赖
+ 依赖的这个类还依赖别的类   classpath hell  classpath中有两个完全一样的jar包但版本不同, 而引用了老的版本, 某一天系统崩溃 当多个同名类出现在classpath就是噩梦的开始  包管理  包管理的本质就是告诉JVM如何找到所需要的第三方类库 以及成功的解决冲突问题  scope  test测试代码不会被发布出去, scope为test 编译时有效,运行时无效, scope为provided  Maven  约定优于配置 严格按照层次管理 四个属性: groupid, artifactid, version,scope 分别是组id , 包名id, 版本号, 类别 传递性依赖的自动管理  原则:绝对不允许最终的classpath出现同名不同版本的jar包  依赖冲突的解决  原则:最近的胜出,同样近时先出现的胜出  依赖的scope  包冲突异常  AbstractMethodError NoClassDefFoundError ClassNotFoundException LinkageError  上面这个情况是同名jar和你的项目一样近,先出现的C1胜出</description>
+    </item>
     
     <item>
       <title>单例模式</title>

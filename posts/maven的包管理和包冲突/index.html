@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>阿飞的博客  | Maven的包管理和包冲突</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.58.3" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.d98f2eb6bcd1eaedb7edf166bd16af26.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+    
+    <meta property="og:title" content="Maven的包管理和包冲突" />
+<meta property="og:description" content="Maven的包管理和包冲突 JVM的工作  加载字节码,执行一个类 如果碰到新的类, 加载它
+ 在哪里可以找到类
+ -classpath / -cp  类的全限定类名(目录层级) 唯一确定了一个类
+ 包就是把许多类放在一起压缩的jar
+ 传递性依赖
+ 依赖的这个类还依赖别的类   classpath hell  classpath中有两个完全一样的jar包但版本不同, 而引用了老的版本, 某一天系统崩溃 当多个同名类出现在classpath就是噩梦的开始  包管理  包管理的本质就是告诉JVM如何找到所需要的第三方类库 以及成功的解决冲突问题  scope  test测试代码不会被发布出去, scope为test 编译时有效,运行时无效, scope为provided  Maven  约定优于配置 严格按照层次管理 四个属性: groupid, artifactid, version,scope 分别是组id , 包名id, 版本号, 类别 传递性依赖的自动管理  原则:绝对不允许最终的classpath出现同名不同版本的jar包  依赖冲突的解决  原则:最近的胜出,同样近时先出现的胜出  依赖的scope  包冲突异常  AbstractMethodError NoClassDefFoundError ClassNotFoundException LinkageError  上面这个情况是同名jar和你的项目一样近,先出现的C1胜出" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://afei.website/posts/maven%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E5%92%8C%E5%8C%85%E5%86%B2%E7%AA%81/" />
+<meta property="article:published_time" content="2019-10-18T16:47:09+08:00" />
+<meta property="article:modified_time" content="2019-10-18T16:47:09+08:00" />
+<meta itemprop="name" content="Maven的包管理和包冲突">
+<meta itemprop="description" content="Maven的包管理和包冲突 JVM的工作  加载字节码,执行一个类 如果碰到新的类, 加载它
+ 在哪里可以找到类
+ -classpath / -cp  类的全限定类名(目录层级) 唯一确定了一个类
+ 包就是把许多类放在一起压缩的jar
+ 传递性依赖
+ 依赖的这个类还依赖别的类   classpath hell  classpath中有两个完全一样的jar包但版本不同, 而引用了老的版本, 某一天系统崩溃 当多个同名类出现在classpath就是噩梦的开始  包管理  包管理的本质就是告诉JVM如何找到所需要的第三方类库 以及成功的解决冲突问题  scope  test测试代码不会被发布出去, scope为test 编译时有效,运行时无效, scope为provided  Maven  约定优于配置 严格按照层次管理 四个属性: groupid, artifactid, version,scope 分别是组id , 包名id, 版本号, 类别 传递性依赖的自动管理  原则:绝对不允许最终的classpath出现同名不同版本的jar包  依赖冲突的解决  原则:最近的胜出,同样近时先出现的胜出  依赖的scope  包冲突异常  AbstractMethodError NoClassDefFoundError ClassNotFoundException LinkageError  上面这个情况是同名jar和你的项目一样近,先出现的C1胜出">
+
+
+<meta itemprop="datePublished" content="2019-10-18T16:47:09&#43;08:00" />
+<meta itemprop="dateModified" content="2019-10-18T16:47:09&#43;08:00" />
+<meta itemprop="wordCount" content="88">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Maven的包管理和包冲突"/>
+<meta name="twitter:description" content="Maven的包管理和包冲突 JVM的工作  加载字节码,执行一个类 如果碰到新的类, 加载它
+ 在哪里可以找到类
+ -classpath / -cp  类的全限定类名(目录层级) 唯一确定了一个类
+ 包就是把许多类放在一起压缩的jar
+ 传递性依赖
+ 依赖的这个类还依赖别的类   classpath hell  classpath中有两个完全一样的jar包但版本不同, 而引用了老的版本, 某一天系统崩溃 当多个同名类出现在classpath就是噩梦的开始  包管理  包管理的本质就是告诉JVM如何找到所需要的第三方类库 以及成功的解决冲突问题  scope  test测试代码不会被发布出去, scope为test 编译时有效,运行时无效, scope为provided  Maven  约定优于配置 严格按照层次管理 四个属性: groupid, artifactid, version,scope 分别是组id , 包名id, 版本号, 类别 传递性依赖的自动管理  原则:绝对不允许最终的classpath出现同名不同版本的jar包  依赖冲突的解决  原则:最近的胜出,同样近时先出现的胜出  依赖的scope  包冲突异常  AbstractMethodError NoClassDefFoundError ClassNotFoundException LinkageError  上面这个情况是同名jar和你的项目一样近,先出现的C1胜出"/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://afei.website" class="f3 fw2 hover-white no-underline white-90 dib">
+      阿飞的博客
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">Maven的包管理和包冲突</h1>
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2019-10-18T16:47:09&#43;08:00">October 18, 2019</time>
+      
+      
+    </header>
+
+    <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+<h1 id="maven的包管理和包冲突">Maven的包管理和包冲突</h1>
+
+<h3 id="jvm-的工作"><code>JVM</code>的工作</h3>
+
+<ul>
+<li>加载字节码,执行一个类</li>
+
+<li><p>如果碰到新的类, 加载它</p></li>
+
+<li><p>在哪里可以找到类</p>
+
+<ul>
+<li><code>-classpath</code> / <code>-cp</code></li>
+</ul></li>
+
+<li><p>类的全限定类名(目录层级) 唯一确定了一个类</p></li>
+
+<li><p>包就是把许多类放在一起压缩的jar</p></li>
+
+<li><p>传递性依赖</p>
+
+<ul>
+<li>依赖的这个类还依赖别的类</li>
+</ul></li>
+</ul>
+
+<h3 id="classpath-hell"><code>classpath hell</code></h3>
+
+<ul>
+<li><code>classpath</code>中有两个完全一样的jar包但版本不同, 而引用了老的版本, 某一天系统崩溃</li>
+<li>当多个同名类出现在<code>classpath</code>就是噩梦的开始</li>
+</ul>
+
+<h3 id="包管理">包管理</h3>
+
+<ul>
+<li>包管理的本质就是告诉<code>JVM</code>如何找到所需要的第三方类库</li>
+<li>以及成功的解决冲突问题</li>
+</ul>
+
+<h3 id="scope">scope</h3>
+
+<ul>
+<li><code>test</code>测试代码不会被发布出去, <code>scope</code>为<code>test</code></li>
+<li>编译时有效,运行时无效, <code>scope</code>为<code>provided</code></li>
+</ul>
+
+<h3 id="maven">Maven</h3>
+
+<ul>
+<li>约定优于配置</li>
+<li>严格按照层次管理</li>
+<li>四个属性: <code>groupid</code>, <code>artifactid</code>, <code>version</code>,<code>scope</code> 分别是组id , 包名id, 版本号, 类别</li>
+<li>传递性依赖的自动管理
+
+<ul>
+<li><strong>原则:绝对不允许最终的<code>classpath</code>出现同名不同版本的jar包</strong></li>
+</ul></li>
+<li>依赖冲突的解决
+
+<ul>
+<li><strong>原则:最近的胜出,同样近时先出现的胜出</strong></li>
+</ul></li>
+<li>依赖的scope</li>
+</ul>
+
+<h3 id="包冲突异常">包冲突异常</h3>
+
+<ul>
+<li><code>AbstractMethodError</code></li>
+<li><code>NoClassDefFoundError</code></li>
+<li><code>ClassNotFoundException</code></li>
+<li><code>LinkageError</code></li>
+</ul>
+
+<p><img src="/images/1571383886673.png" alt="1571383886673" /></p>
+
+<p>上面这个情况是同名jar和你的项目一样近,先出现的<code>C1</code>胜出</p>
+
+<h3 id="查询项目依赖树">查询项目依赖树</h3>
+
+<pre><code class="language-sh">mvn dependency:tree
+</code></pre>
+
+<pre><code>// 过滤出想要的结果
+mvn dependency:tree -Dincludes=vilocity:vilocity
+</code></pre>
+
+<h3 id="包冲突例子">包冲突例子</h3>
+
+<p><img src="/images/1571385011556.png" alt="1571385011556" /></p>
+
+<p>蓝色的部分被maven因为和<code>com.github.hcsp:test-library-c:0.1</code>冲突又比较远而去除</p>
+
+<p><code>mvn dependency:tree</code> 查找包依赖树结果中没有这个包了:</p>
+
+<p><img src="/images/1571385126180.png" alt="1571385126180" /></p>
+
+<p><img src="/images/1571385145796.png" alt="1571385145796" /></p>
+
+<p>因为maven项目把高版本的包给排除了, 而高版本里面有个底版本没有的方法, 就会报错</p>
+
+<p><img src="/images/1571385208749.png" alt="1571385208749" /></p>
+
+<p>为了证实这个想法去maven仓库找<code>pom.xml</code>:</p>
+
+<p><img src="/images/1571385326790.png" alt="1571385326790" /></p>
+
+<p>从<code>pom.xml</code>的<code>url</code>去找源代码</p>
+
+<p><img src="/images/1571385459292.png" alt="1571385459292" /></p>
+
+<h3 id="上述冲突的解决方法">上述冲突的解决方法</h3>
+
+<p><img src="/images/1571385840897.png" alt="1571385840897" /></p>
+
+<ol>
+<li>直接引入<code>c:0.2</code>版本, 这样这个版本就比较近, 不会被删掉, 而<code>c:0.1</code>版本被删掉</li>
+</ol>
+
+<p><img src="/images/1571385907559.png" alt="1571385907559" /></p>
+
+<ol>
+<li>直接把<code>c:0.1</code>排除掉</li>
+</ol>
+
+<p><img src="/images/1571386100917.png" alt="1571386100917" /></p>
+
+<h3 id="maven-helper-插件使用"><code>maven helper</code> 插件使用</h3>
+
+<ul>
+<li><p>安装<code>maven helper</code>插件</p></li>
+
+<li><p>点击<code>dependency analyzer</code></p></li>
+</ul>
+
+<p><img src="/images/1571386952079.png" alt="1571386952079" /></p>
+
+<ul>
+<li>点击<code>reimport</code></li>
+</ul>
+
+<p><img src="/images/1571387015421.png" alt="1571387015421" /></p>
+
+<ul>
+<li>显示如下</li>
+</ul>
+
+<p><img src="/images/1571387039055.png" alt="1571387039055" /></p>
+
+<ul>
+<li>右键, exclude<code>test-library-c:0.1</code> , 排除后<code>reimport</code></li>
+</ul>
+
+<p><img src="/images/1571387109684.png" alt="1571387109684" /></p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+      
+      
+      </div>
+    </section>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://afei.website" >
+    &copy; 2019 阿飞的博客
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>
