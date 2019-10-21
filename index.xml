@@ -6,10 +6,19 @@
     <description>Recent content on 阿飞的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
-    <lastBuildDate>Fri, 18 Oct 2019 16:47:09 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 21 Oct 2019 22:07:58 +0800</lastBuildDate>
     
 	<atom:link href="http://afei.website/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Collection体系和常用实现类</title>
+      <link>http://afei.website/posts/collection%E4%BD%93%E7%B3%BB%E5%92%8C%E5%B8%B8%E7%94%A8%E5%AE%9E%E7%8E%B0%E7%B1%BB/</link>
+      <pubDate>Mon, 21 Oct 2019 22:07:58 +0800</pubDate>
+      
+      <guid>http://afei.website/posts/collection%E4%BD%93%E7%B3%BB%E5%92%8C%E5%B8%B8%E7%94%A8%E5%AE%9E%E7%8E%B0%E7%B1%BB/</guid>
+      <description>Collection体系和常用实现类  Collection继承体系  // 常用实现: ArrayList List&amp;lt;Integer&amp;gt; list = new ArrayList&amp;lt;&amp;gt;(); for(int i = 0; i&amp;lt; list.size(); i++) { list.get(i); }  // 常用实现: LinkedHashSet Collect c = new LinkedHashSet(); List&amp;lt;Integer&amp;gt; list = new ArrayList&amp;lt;&amp;gt;(c); //等价于 List&amp;lt;Integer&amp;gt; list2 = new ArrayList&amp;lt;&amp;gt;(); list2.addAll(c); //等价于 List&amp;lt;Integer&amp;gt; list3 = new ArrayList&amp;lt;&amp;gt;(); for(Integer i : c){ list3.add(i); } list.add(1); list.add(2); //不停的加  List  最常用的ArrayList  本质上是一个数组  面试题: 动态扩容的实现  创建一个更大的空间, 然后把原先的所有元素拷贝过去    旧的容量=数组的长度</description>
+    </item>
     
     <item>
       <title>Maven的包管理和包冲突</title>
