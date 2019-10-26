@@ -35,7 +35,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://afei.website/" />
 
-<meta property="og:updated_time" content="2019-10-21T22:07:58+08:00" />
+<meta property="og:updated_time" content="2019-10-25T22:06:17+08:00" />
 <meta itemprop="name" content="阿飞的博客">
 <meta itemprop="description" content="">
 
@@ -122,6 +122,41 @@
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%B9%B6%E5%8F%91%E5%8E%9F%E7%90%86/" class="color-inherit dim link">
+            多线程与并发原理
+            </a>
+        </h1>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          多线程与并发原理 为什么需要多线程  多线程就类似N个工人在同一时间去干同一件事, 也叫线程并发执行, 效率高 这个同一时间指的是同一秒里面, CPU在这一毫秒执行了A线程, 然后下一毫秒挂起A线程, 执行B线程, 然后这样交替执行完AB线程, 就是并发结束  多线程带来了什么问题, 如何避免 多线程带来了线程不安全性, 也就是因为很多线程乱序执行同一个程序, 导致结果和单线程执行结果不一致
+解决方案:
+ 选择避免共享资源 如果不能避免共享资源, 保证共享资源的原子性和一致性  synchronized 同步机制 Lock   线程的属性、状态 线程属性 线程的属性有以下这些: 线程优先级, 守护线程, 处理未捕获异常的处理器
+1.线程优先级
+每个线程都有一个优先级, 在不处理时, 默认优先级都相同, 优先级分成1-10, 高优先级的线程会先被操作
+2.守护线程
+t.setDaemon(true); //将线程转换为守护线程  守护线程的作用是为其他线程提供服务, 如果其他所有线程被退出, 那守护线程就结束了,例如其他线程的计时器, 可以是守护线程
+3.处理未捕获异常的处理器
+run方法抛出任何异常会导致线程终止, 在这种情况下, 我们需要实现一个Thread.UncaughtExceptionHandler。我们可以通过这种方式来知道，真正让我们的run意外死亡的问题在哪里
+线程状态 线程一共有6中状态, 分别是New , Runnable, Blocked, Waiting, Timed waiting, Terminated
+1. New 新创建的线程
+new Thread(r)  指刚刚new 出来的线程, 这个线程没有通过start方法启动
+        </div>
+          <a href="/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%B9%B6%E5%8F%91%E5%8E%9F%E7%90%86/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+          </div>
+        
+          <div class="relative w-100 mb4">
+            
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
+      <div class="blah w-100">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
           <a href="/posts/collection%E4%BD%93%E7%B3%BB%E5%92%8C%E5%B8%B8%E7%94%A8%E5%AE%9E%E7%8E%B0%E7%B1%BB/" class="color-inherit dim link">
             Collection体系和常用实现类
             </a>
@@ -167,40 +202,18 @@
 
           </div>
         
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" class="color-inherit dim link">
-            单例模式
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-           单例模式 需求: 只创建一个对象, 不需要第二个
-public class World { private static final World SINGLETON_INSTANCE = new World(); public static World getInstance() { return SINGLETON_INSTANCE; } private World() { } }   final修饰一个实例, 作为静态成员
- 静态工厂方法, 返回这个静态成员
- 把构造器改成private
-  
-        </div>
-          <a href="/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
-  </div>
-</article>
-
-          </div>
-        
       </section>
 
       
       <section class="w-100">
         <h1 class="f3">More</h1>
         
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="/posts/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" class="link black dim">
+              单例模式
+            </a>
+          </h2>
         
           <h2 class="f5 fw4 mb4 dib mr3">
             <a href="/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" class="link black dim">

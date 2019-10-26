@@ -6,10 +6,30 @@
     <description>Recent content in Posts on 阿飞的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
-    <lastBuildDate>Mon, 21 Oct 2019 22:07:58 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 25 Oct 2019 22:06:17 +0800</lastBuildDate>
     
 	<atom:link href="http://afei.website/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>多线程与并发原理</title>
+      <link>http://afei.website/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%B9%B6%E5%8F%91%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Fri, 25 Oct 2019 22:06:17 +0800</pubDate>
+      
+      <guid>http://afei.website/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%B9%B6%E5%8F%91%E5%8E%9F%E7%90%86/</guid>
+      <description>多线程与并发原理 为什么需要多线程  多线程就类似N个工人在同一时间去干同一件事, 也叫线程并发执行, 效率高 这个同一时间指的是同一秒里面, CPU在这一毫秒执行了A线程, 然后下一毫秒挂起A线程, 执行B线程, 然后这样交替执行完AB线程, 就是并发结束  多线程带来了什么问题, 如何避免 多线程带来了线程不安全性, 也就是因为很多线程乱序执行同一个程序, 导致结果和单线程执行结果不一致
+解决方案:
+ 选择避免共享资源 如果不能避免共享资源, 保证共享资源的原子性和一致性  synchronized 同步机制 Lock   线程的属性、状态 线程属性 线程的属性有以下这些: 线程优先级, 守护线程, 处理未捕获异常的处理器
+1.线程优先级
+每个线程都有一个优先级, 在不处理时, 默认优先级都相同, 优先级分成1-10, 高优先级的线程会先被操作
+2.守护线程
+t.setDaemon(true); //将线程转换为守护线程  守护线程的作用是为其他线程提供服务, 如果其他所有线程被退出, 那守护线程就结束了,例如其他线程的计时器, 可以是守护线程
+3.处理未捕获异常的处理器
+run方法抛出任何异常会导致线程终止, 在这种情况下, 我们需要实现一个Thread.UncaughtExceptionHandler。我们可以通过这种方式来知道，真正让我们的run意外死亡的问题在哪里
+线程状态 线程一共有6中状态, 分别是New , Runnable, Blocked, Waiting, Timed waiting, Terminated
+1. New 新创建的线程
+new Thread(r)  指刚刚new 出来的线程, 这个线程没有通过start方法启动</description>
+    </item>
     
     <item>
       <title>Collection体系和常用实现类</title>
@@ -23,7 +43,7 @@
     <item>
       <title>Maven的包管理和包冲突</title>
       <link>http://afei.website/posts/maven%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E5%92%8C%E5%8C%85%E5%86%B2%E7%AA%81/</link>
-      <pubDate>Fri, 18 Oct 2019 16:47:09 +0800</pubDate>
+      <pubDate>Fri, 18 Oct 2019 22:47:09 +0800</pubDate>
       
       <guid>http://afei.website/posts/maven%E7%9A%84%E5%8C%85%E7%AE%A1%E7%90%86%E5%92%8C%E5%8C%85%E5%86%B2%E7%AA%81/</guid>
       <description>Maven的包管理和包冲突 JVM的工作  加载字节码,执行一个类 如果碰到新的类, 加载它
